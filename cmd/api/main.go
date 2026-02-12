@@ -33,7 +33,8 @@ func main() {
         config: settings,
         logger: logger,
     }
-router := http.NewServeMux()
+
+    router := http.NewServeMux()
     router.HandleFunc("/v1/healthcheck", appInstance.healthcheckHandler)
 
     apiServer := &http.Server {
@@ -44,6 +45,7 @@ router := http.NewServeMux()
         WriteTimeout: 10 * time.Second,
         ErrorLog: slog.NewLogLogger(logger.Handler(), slog.LevelError),
     }
+
 logger.Info("starting server", "address", apiServer.Addr,
                 "environment", settings.environment)
     err := apiServer.ListenAndServe()
