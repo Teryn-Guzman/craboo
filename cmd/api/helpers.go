@@ -5,8 +5,11 @@ import (
 	"net/http"
 )
 
+// create an envelope type
+  type envelope map[string]any
+
 func (a *applicationDependencies)writeJSON(w http.ResponseWriter,
-                                           status int, data any,
+                                           status int, data envelope,
                                            headers http.Header) error  {
     jsResponse, err := json.MarshalIndent(data, "", "\t")
     if err != nil {
@@ -29,4 +32,3 @@ func (a *applicationDependencies)writeJSON(w http.ResponseWriter,
     return nil
 
 }
-
